@@ -78,7 +78,7 @@ namespace PeopleDB
             bmpNew.Save(savePath, ImageFormat.Png);
         }
 
-        private int getPerson(string name)
+        public int getPerson(string name)
         {
             int result = -1;
 

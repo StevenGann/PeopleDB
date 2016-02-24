@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="ListFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Documents\GitHub\ListFile\C#\ListFile\bin\Debug\ListFile.dll</HintPath>
+      <HintPath>..\..\ListFile\C#\ListFile\bin\Debug\ListFile.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

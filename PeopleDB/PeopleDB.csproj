@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ListFile">
-      <HintPath>..\..\..\Documents\GitHub\ListFile\C#\ListFile\bin\Debug\ListFile.dll</HintPath>
+      <HintPath>..\..\ListFile\C#\ListFile\bin\Debug\ListFile.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
