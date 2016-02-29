@@ -87,5 +87,30 @@ namespace PeopleDBGUI
             }
             catch { }
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void newPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (NewPerson newperson = new NewPerson())
+            {
+                newperson.ShowDialog();
+                List<string> result = newperson.Result;
+
+                if (result.Count == 2)
+                {
+                    DB.AddPerson(result[0], result[1]);
+                    UpdatePeopleGrid();
+                }
+                else if (result.Count == 1)
+                {
+                    DB.AddPerson(result[0]);
+                    UpdatePeopleGrid();
+                }
+            }
+        }
     }
 }

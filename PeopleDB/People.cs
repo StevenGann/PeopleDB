@@ -14,8 +14,8 @@ namespace PeopleDB
     public class People
     {
         public ListFile<Person> DB;
-        public string ImagesPath = "Database\\Images\\";
-        public string DBPath = "Database\\";
+        public string ImagesPath = "C:\\PeopleDB\\Database\\Images\\";
+        public string DBPath = "C:\\PeopleDB\\Database\\";
 
         public People()
         {
