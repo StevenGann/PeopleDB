@@ -36,5 +36,10 @@ namespace PeopleDB
         {
             Information.Add(new Entry(title, text));
         }
+
+        public override string ToString()
+        {
+            return FullName();
+        }
     }
 }

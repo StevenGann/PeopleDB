@@ -77,6 +77,23 @@ namespace PeopleDBGUI
                 string[] row = { person.Information[i].Title, person.Information[i].Text };
                 dataGridView2.Rows.Add(row);
             }
+
+            if(person.PhotoPath == "")
+            {
+                pictureBox1.Image = PeopleDBGUI.Properties.Resources.default_image;
+            }
+            else
+            {
+                Person tempPerson = DB.FindPerson(dataGridView1.CurrentRow.Cells[0].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[1].Value.ToString());
+                try
+                {
+                    pictureBox1.Image = Image.FromFile(tempPerson.PhotoPath);
+                }
+                catch
+                {
+
+                }
+            }
         }
 
         private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
@@ -110,6 +127,34 @@ namespace PeopleDBGUI
                     DB.AddPerson(result[0]);
                     UpdatePeopleGrid();
                 }
+            }
+        }
+
+        private void buttonAddImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Set filter options and filter index.
+            openFileDialog1.Filter = "PNG|*.png|JPG|*.jpg|All Files|*.*";
+            openFileDialog1.FilterIndex = 3;
+
+            // Process input if the user clicked OK.
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Open the selected file to read.
+                string filePath = openFileDialog1.FileName;
+                string firstName = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                string lastName = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                DB.AddPhoto(firstName + " " + lastName, filePath);
+                UpdatePersonGrid(DB.FindPerson(dataGridView1.CurrentRow.Cells[0].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[1].Value.ToString()));
+            }
+        }
+
+        private void fuzzySearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchDialog searchdialog = new SearchDialog())
+            {
+                searchdialog.ShowDialog();
             }
         }
     }

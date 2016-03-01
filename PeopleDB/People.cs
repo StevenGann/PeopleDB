@@ -75,7 +75,16 @@ namespace PeopleDB
             bmpNew.UnlockBits(bmpData1);
             bmp.Dispose();
 
+            File.Delete(savePath);
             bmpNew.Save(savePath, ImageFormat.Png);
+
+            int personID = getPerson(name);
+            if (personID >= 0)
+            {
+                Person tempPerson = DB[personID];
+                tempPerson.PhotoPath = savePath;
+                DB[personID] = tempPerson;
+            }
         }
 
         public int getPerson(string name)
@@ -150,30 +159,65 @@ namespace PeopleDB
             return result;
         }
 
-        public Person FuzzyFind(string target)
+        public List<Person> FuzzyFind(string target, int count)
         {
-            Person result = new Person();
-            float bestscore = 0.0f;
+            List<Person> result = new List<Person>();
+            List<KeyValuePair<float, Person>> tempResult = new List<KeyValuePair<float, Person>>();
             for (int i = 0; i < DB.Count; i++)
             {
+                string fullname = DB[i].FullName();
                 float score = 0.0f;
-                if (StringSimilarity(target, DB[i].FullName()) > 0.5f)
-                { score += StringSimilarity(target, DB[i].FullName()); }
+                if (StringSimilarity(target, fullname) > 0.5f)
+                { score += StringSimilarity(target, fullname); }
 
-                foreach(Entry entry in DB[i].Information)
-                {
-                    if (StringSimilarity(target, entry.Text) > 0.25f) { score += StringSimilarity(target, entry.Text); }
-                    if (StringSimilarity(target, entry.Title) > 0.25f) { score += StringSimilarity(target, entry.Title); }
-                }
+                int hits = 0;
+                float tempscore = 0.0f;
 
-                if (score > bestscore)
+                char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+                string[] targetwords = target.Split(delimiterChars);
+                foreach (Entry entry in DB[i].Information)
                 {
-                    bestscore = score;
-                    result = DB[i];
+                    string[] entrywords = (entry.Title + " " + entry.Text).Split(delimiterChars);
+                    for (int j = 0; j < targetwords.Length; j++)
+                    {
+                        for (int k = 0; k < entrywords.Length; k++)
+                        {
+                            float similarity = StringSimilarity(targetwords[j], entrywords[k]);
+                            if (similarity > 0.5f)
+                            {
+                                tempscore += similarity;
+                                hits++;
+                            }
+                        }
+                    }
                 }
+                if (hits > 0)
+                {
+                    score += tempscore / (float)hits;
+                }
+                Console.WriteLine(fullname + " = " + score);
+                tempResult.Add(new KeyValuePair<float, Person>(score, DB[i]));
+            }
+
+            tempResult.Sort(CompareKeys);
+            Console.WriteLine("==============================");
+            foreach(KeyValuePair<float, Person> pair in tempResult)
+            {
+                Console.Write(pair.Key + "\t");
+                Console.Write(pair.Value.FullName() + "\n");
+            }
+
+            for(int i = 0; i < Math.Min(count, tempResult.Count); i++)
+            {
+                result.Add(tempResult[tempResult.Count - (i + 1)].Value);
             }
 
             return result;
+        }
+
+        static int CompareKeys(KeyValuePair<float, Person> a, KeyValuePair<float, Person> b)
+        {
+            return a.Key.CompareTo(b.Key);
         }
 
         public static float StringSimilarity(string s, string t)
@@ -181,7 +225,9 @@ namespace PeopleDB
             float result = 0.0f;
 
             result = (Math.Max(s.Length, t.Length) - LevenshteinDistance(s, t)) / ((float)Math.Max(s.Length, t.Length));
-            Console.Write(result + "\t|\t" + s + "\t|\t" + t + "\n");
+            result *= 2;
+            result *= result;
+            //Console.Write(result + "\t|\t" + s + "\t|\t" + t + "\n");
             return result;
         }
 

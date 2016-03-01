@@ -13,8 +13,12 @@ namespace Tester
         {
             People DB = new People();
 
-            Person test = DB.FuzzyFind("Bachelor");
-            Console.WriteLine(test.FullName());
+            List<Person> result = DB.FuzzyFind("This is a test of some assorted text.", 100);
+            Console.WriteLine("======================");
+            foreach (Person person in result)
+            {
+                Console.WriteLine(person.FullName());
+            }
             Console.ReadLine();
         }
     }
