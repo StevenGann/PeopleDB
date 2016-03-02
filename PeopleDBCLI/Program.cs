@@ -1,30 +1,25 @@
 ﻿using PeopleDB;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeopleDBCLI
 {
-    class Program
+    internal class Program
     {
-        static People DB = new People();
-        static string prompt = ">>";
+        private static People DB = new People();
+        private static string prompt = ">>";
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             bool exit = false;
             while (!exit)
             {
                 Console.Write(prompt);
                 string[] inputTokens = tokenize(Console.ReadLine());
-                if(inputTokens[0].ToLower() == "add")
+                if (inputTokens[0].ToLower() == "add")
                 {
                     Add(inputTokens);
                 }
-                else if (inputTokens[0].ToLower() == "show" )
+                else if (inputTokens[0].ToLower() == "show")
                 {
                     if (inputTokens.Length < 2)
                     {
@@ -61,18 +56,17 @@ namespace PeopleDBCLI
             Console.WriteLine("show all\t Lists all names in the database.");
         }
 
-        static bool ShowPerson(string[] inputTokens)
+        private static bool ShowPerson(string[] inputTokens)
         {
             if (inputTokens[1].ToLower() == "all")
             {
                 Console.Clear();
-                for(int i = 0; i < DB.DB.Count; i++)
+                for (int i = 0; i < DB.DB.Count; i++)
                 {
                     Console.WriteLine(DB.DB[i].FullName());
                 }
                 return true;
             }
-
 
             string firstName = inputTokens[1];
             string lastName = "";
@@ -94,7 +88,7 @@ namespace PeopleDBCLI
             else
             {
                 Person tempPerson = new Person();
-                
+
                 if (DB.CheckPerson(name))
                 {
                     tempPerson = DB.FindPerson(name);
@@ -113,7 +107,7 @@ namespace PeopleDBCLI
                 Console.WriteLine("Last Name:\t" + tempPerson.LastName);
                 Console.WriteLine("=================================================");
 
-                foreach(Entry entry in tempPerson.Information)
+                foreach (Entry entry in tempPerson.Information)
                 {
                     Console.WriteLine(entry.Title + ":");
                     Console.WriteLine(entry.Text);
@@ -123,7 +117,7 @@ namespace PeopleDBCLI
             return true;
         }
 
-        static bool Add(string[] inputTokens)
+        private static bool Add(string[] inputTokens)
         {
             if (inputTokens[1].ToLower() == "person")
             {
@@ -176,13 +170,13 @@ namespace PeopleDBCLI
             return true;
         }
 
-        static void showError(string message)
+        private static void showError(string message)
         {
             Console.WriteLine("There has been an error.");
             if (message != "") { Console.WriteLine("Message: " + message); }
         }
 
-        static string[] tokenize(string input)
+        private static string[] tokenize(string input)
         {
             char[] delimiterChars = { ' ' };
             string[] words = input.Split(delimiterChars);

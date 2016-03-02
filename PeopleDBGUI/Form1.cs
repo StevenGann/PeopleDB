@@ -1,19 +1,14 @@
 ﻿using PeopleDB;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PeopleDBGUI
 {
     public partial class Form1 : Form
     {
-        static People DB = new People();
+        private static People DB = new People();
 
         public Form1()
         {
@@ -24,7 +19,6 @@ namespace PeopleDBGUI
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            
         }
 
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -43,7 +37,6 @@ namespace PeopleDBGUI
                         string title = row.Cells[0].Value.ToString();
                         string text = row.Cells[1].Value.ToString();
                         tempPerson.Information.Add(new Entry(title, text));
-                        
                     }
                     catch { }
                 }
@@ -78,7 +71,11 @@ namespace PeopleDBGUI
                 dataGridView2.Rows.Add(row);
             }
 
-            if(person.PhotoPath == "")
+            textBoxImagePath.Text = person.PhotoPath;
+            textBoxFirstName.Text = person.FirstName;
+            textBoxLastName.Text = person.LastName;
+
+            if (person.PhotoPath == "")
             {
                 pictureBox1.Image = PeopleDBGUI.Properties.Resources.default_image;
             }
@@ -87,11 +84,16 @@ namespace PeopleDBGUI
                 Person tempPerson = DB.FindPerson(dataGridView1.CurrentRow.Cells[0].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[1].Value.ToString());
                 try
                 {
-                    pictureBox1.Image = Image.FromFile(tempPerson.PhotoPath);
+                    Image img;
+                    using (Bitmap bmpTemp = new Bitmap(tempPerson.PhotoPath))
+                    {
+                        img = new Bitmap(bmpTemp);
+                    }
+                    pictureBox1.Image = img;
                 }
                 catch
                 {
-
+                    pictureBox1.Image = PeopleDBGUI.Properties.Resources.default_image;
                 }
             }
         }
@@ -107,7 +109,6 @@ namespace PeopleDBGUI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         private void newPersonToolStripMenuItem_Click(object sender, EventArgs e)
@@ -156,6 +157,17 @@ namespace PeopleDBGUI
             {
                 searchdialog.ShowDialog();
             }
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            int personid = DB.getPerson(dataGridView1.CurrentRow.Cells[0].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            Person tempPerson = DB.FindPerson(dataGridView1.CurrentRow.Cells[0].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            tempPerson.FirstName = textBoxFirstName.Text;
+            tempPerson.LastName = textBoxLastName.Text;
+            DB.DB[personid] = tempPerson;
+            UpdatePeopleGrid();
+            UpdatePersonGrid(tempPerson);
         }
     }
 }

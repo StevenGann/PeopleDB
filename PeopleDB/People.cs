@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Threading;
 using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace PeopleDB
 {
@@ -121,7 +117,7 @@ namespace PeopleDB
             for (int i = 0; i < DB.Count; i++)
             {
                 //Check if anyone's alias matches. Last resort! This is slow.
-                foreach(Entry entry in DB[i].Information)
+                foreach (Entry entry in DB[i].Information)
                 {
                     if (entry.Title.ToLower() == "alias" && entry.Text.ToLower() == name.ToLower())
                     {
@@ -201,13 +197,13 @@ namespace PeopleDB
 
             tempResult.Sort(CompareKeys);
             Console.WriteLine("==============================");
-            foreach(KeyValuePair<float, Person> pair in tempResult)
+            foreach (KeyValuePair<float, Person> pair in tempResult)
             {
                 Console.Write(pair.Key + "\t");
                 Console.Write(pair.Value.FullName() + "\n");
             }
 
-            for(int i = 0; i < Math.Min(count, tempResult.Count); i++)
+            for (int i = 0; i < Math.Min(count, tempResult.Count); i++)
             {
                 result.Add(tempResult[tempResult.Count - (i + 1)].Value);
             }
@@ -215,7 +211,7 @@ namespace PeopleDB
             return result;
         }
 
-        static int CompareKeys(KeyValuePair<float, Person> a, KeyValuePair<float, Person> b)
+        private static int CompareKeys(KeyValuePair<float, Person> a, KeyValuePair<float, Person> b)
         {
             return a.Key.CompareTo(b.Key);
         }
