@@ -10,13 +10,23 @@ namespace PeopleDB
     public class People
     {
         public ListFile<Person> DB;
-        public string ImagesPath = "C:\\PeopleDB\\Database\\Images\\";
+        public string ImagesPath = "Images\\";
         public string DBPath = "C:\\PeopleDB\\Database\\";
 
         public People()
         {
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("PeopleDB");
+            if (key.GetValue("path") == null)
+            {
+                key.SetValue("path", "C:\\PeopleDB\\Database\\");
+            }
+            else
+            {
+                DBPath = (string)key.GetValue("path");
+            }
+
             Directory.CreateDirectory(DBPath);
-            Directory.CreateDirectory(ImagesPath);
+            Directory.CreateDirectory(DBPath + ImagesPath);
             DB = new ListFile<Person>(DBPath);
             DB.Load();
         }
@@ -51,8 +61,8 @@ namespace PeopleDB
 
         public void AddPhoto(string name, string path)
         {
-            Directory.CreateDirectory(ImagesPath);
-            string savePath = ImagesPath + DB[getPerson(name)].LastName + "_" + DB[getPerson(name)].FirstName + ".png";
+            Directory.CreateDirectory(DBPath + ImagesPath);
+            string savePath = DBPath + ImagesPath + DB[getPerson(name)].LastName + "_" + DB[getPerson(name)].FirstName + ".png";
 
             Image img = Image.FromFile(path);
             Bitmap bmp = img as Bitmap;
