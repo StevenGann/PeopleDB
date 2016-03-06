@@ -34,6 +34,13 @@
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.textBoxLastName = new System.Windows.Forms.TextBox();
+            this.textBoxFirstName = new System.Windows.Forms.TextBox();
+            this.textBoxImagePath = new System.Windows.Forms.TextBox();
             this.buttonAddImage = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -47,13 +54,7 @@
             this.exportDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fuzzySearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBoxImagePath = new System.Windows.Forms.TextBox();
-            this.textBoxFirstName = new System.Windows.Forms.TextBox();
-            this.textBoxLastName = new System.Windows.Forms.TextBox();
-            this.buttonUpdate = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.changeDBLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -140,6 +141,72 @@
             this.splitContainer2.SplitterDistance = 200;
             this.splitContainer2.TabIndex = 2;
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(134, 87);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Last Name";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(135, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "First Name";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(131, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Image Path";
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonUpdate.Location = new System.Drawing.Point(245, 110);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(105, 23);
+            this.buttonUpdate.TabIndex = 5;
+            this.buttonUpdate.Text = "Update Person";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // textBoxLastName
+            // 
+            this.textBoxLastName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxLastName.Location = new System.Drawing.Point(198, 84);
+            this.textBoxLastName.Name = "textBoxLastName";
+            this.textBoxLastName.Size = new System.Drawing.Size(152, 20);
+            this.textBoxLastName.TabIndex = 4;
+            // 
+            // textBoxFirstName
+            // 
+            this.textBoxFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxFirstName.Location = new System.Drawing.Point(198, 58);
+            this.textBoxFirstName.Name = "textBoxFirstName";
+            this.textBoxFirstName.Size = new System.Drawing.Size(152, 20);
+            this.textBoxFirstName.TabIndex = 3;
+            // 
+            // textBoxImagePath
+            // 
+            this.textBoxImagePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxImagePath.Location = new System.Drawing.Point(198, 32);
+            this.textBoxImagePath.Name = "textBoxImagePath";
+            this.textBoxImagePath.ReadOnly = true;
+            this.textBoxImagePath.Size = new System.Drawing.Size(152, 20);
+            this.textBoxImagePath.TabIndex = 2;
+            // 
             // buttonAddImage
             // 
             this.buttonAddImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -212,6 +279,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newPersonToolStripMenuItem,
+            this.changeDBLocationToolStripMenuItem,
             this.backupDBToolStripMenuItem,
             this.exportDBToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -221,20 +289,20 @@
             // newPersonToolStripMenuItem
             // 
             this.newPersonToolStripMenuItem.Name = "newPersonToolStripMenuItem";
-            this.newPersonToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.newPersonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newPersonToolStripMenuItem.Text = "New Person";
             this.newPersonToolStripMenuItem.Click += new System.EventHandler(this.newPersonToolStripMenuItem_Click);
             // 
             // backupDBToolStripMenuItem
             // 
             this.backupDBToolStripMenuItem.Name = "backupDBToolStripMenuItem";
-            this.backupDBToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.backupDBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.backupDBToolStripMenuItem.Text = "Backup DB";
             // 
             // exportDBToolStripMenuItem
             // 
             this.exportDBToolStripMenuItem.Name = "exportDBToolStripMenuItem";
-            this.exportDBToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.exportDBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportDBToolStripMenuItem.Text = "Export DB";
             // 
             // searchToolStripMenuItem
@@ -252,71 +320,12 @@
             this.fuzzySearchToolStripMenuItem.Text = "Fuzzy Search";
             this.fuzzySearchToolStripMenuItem.Click += new System.EventHandler(this.fuzzySearchToolStripMenuItem_Click);
             // 
-            // textBoxImagePath
+            // changeDBLocationToolStripMenuItem
             // 
-            this.textBoxImagePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxImagePath.Location = new System.Drawing.Point(198, 32);
-            this.textBoxImagePath.Name = "textBoxImagePath";
-            this.textBoxImagePath.ReadOnly = true;
-            this.textBoxImagePath.Size = new System.Drawing.Size(152, 20);
-            this.textBoxImagePath.TabIndex = 2;
-            // 
-            // textBoxFirstName
-            // 
-            this.textBoxFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFirstName.Location = new System.Drawing.Point(198, 58);
-            this.textBoxFirstName.Name = "textBoxFirstName";
-            this.textBoxFirstName.Size = new System.Drawing.Size(152, 20);
-            this.textBoxFirstName.TabIndex = 3;
-            // 
-            // textBoxLastName
-            // 
-            this.textBoxLastName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLastName.Location = new System.Drawing.Point(198, 84);
-            this.textBoxLastName.Name = "textBoxLastName";
-            this.textBoxLastName.Size = new System.Drawing.Size(152, 20);
-            this.textBoxLastName.TabIndex = 4;
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonUpdate.Location = new System.Drawing.Point(245, 110);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(105, 23);
-            this.buttonUpdate.TabIndex = 5;
-            this.buttonUpdate.Text = "Update Person";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(131, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Image Path";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "First Name";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(134, 87);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Last Name";
+            this.changeDBLocationToolStripMenuItem.Name = "changeDBLocationToolStripMenuItem";
+            this.changeDBLocationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.changeDBLocationToolStripMenuItem.Text = "Relocate DB";
+            this.changeDBLocationToolStripMenuItem.Click += new System.EventHandler(this.changeDBLocationToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -375,6 +384,7 @@
         private System.Windows.Forms.TextBox textBoxLastName;
         private System.Windows.Forms.TextBox textBoxFirstName;
         private System.Windows.Forms.TextBox textBoxImagePath;
+        private System.Windows.Forms.ToolStripMenuItem changeDBLocationToolStripMenuItem;
     }
 }
 

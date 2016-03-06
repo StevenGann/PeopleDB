@@ -85,7 +85,7 @@ namespace PeopleDBGUI
                 try
                 {
                     Image img;
-                    using (Bitmap bmpTemp = new Bitmap(tempPerson.PhotoPath))
+                    using (Bitmap bmpTemp = new Bitmap(DB.DBPath + DB.ImagesPath + tempPerson.PhotoPath))
                     {
                         img = new Bitmap(bmpTemp);
                     }
@@ -168,6 +168,18 @@ namespace PeopleDBGUI
             DB.DB[personid] = tempPerson;
             UpdatePeopleGrid();
             UpdatePersonGrid(tempPerson);
+        }
+
+        private void changeDBLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.Description = "Select the directory to store your private database.";
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string folderName = folderBrowserDialog1.SelectedPath;
+                DB.Move(folderName);
+            }
         }
     }
 }

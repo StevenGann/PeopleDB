@@ -31,6 +31,43 @@ namespace PeopleDB
             DB.Load();
         }
 
+        public void Move(string newPath)
+        {
+            string fullpath = newPath + "\\PeopleDB\\Database\\";
+
+            string newImagesPath = fullpath + ImagesPath;
+            Directory.CreateDirectory(newImagesPath);
+
+            string oldImagesPath = DBPath + ImagesPath;
+            DirectoryInfo dir = new DirectoryInfo(oldImagesPath);
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Image directory does not exist or could not be found: "
+                    + oldImagesPath);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            // If the destination directory doesn't exist, create it.
+            if (!Directory.Exists(newPath))
+            {
+                Directory.CreateDirectory(newImagesPath);
+            }
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = System.IO.Path.Combine(newImagesPath, file.Name);
+                file.CopyTo(temppath, true);
+            }
+            DB.Move(fullpath);//ListFile.Move() also deletes the directory and everything in it, including the images folder
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("PeopleDB");
+            key.SetValue("path", fullpath);
+            DBPath = fullpath;
+        }
+
         public void AddPerson(string firstName, string lastName)
         {
             if (getPerson(firstName + " " + lastName) == -1)
@@ -88,7 +125,7 @@ namespace PeopleDB
             if (personID >= 0)
             {
                 Person tempPerson = DB[personID];
-                tempPerson.PhotoPath = savePath;
+                tempPerson.PhotoPath = DB[getPerson(name)].LastName + "_" + DB[getPerson(name)].FirstName + ".png";
                 DB[personID] = tempPerson;
             }
         }
