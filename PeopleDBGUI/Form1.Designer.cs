@@ -50,11 +50,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeDBLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fuzzySearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeDBLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -289,20 +289,27 @@
             // newPersonToolStripMenuItem
             // 
             this.newPersonToolStripMenuItem.Name = "newPersonToolStripMenuItem";
-            this.newPersonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newPersonToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.newPersonToolStripMenuItem.Text = "New Person";
             this.newPersonToolStripMenuItem.Click += new System.EventHandler(this.newPersonToolStripMenuItem_Click);
+            // 
+            // changeDBLocationToolStripMenuItem
+            // 
+            this.changeDBLocationToolStripMenuItem.Name = "changeDBLocationToolStripMenuItem";
+            this.changeDBLocationToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.changeDBLocationToolStripMenuItem.Text = "Relocate DB";
+            this.changeDBLocationToolStripMenuItem.Click += new System.EventHandler(this.changeDBLocationToolStripMenuItem_Click);
             // 
             // backupDBToolStripMenuItem
             // 
             this.backupDBToolStripMenuItem.Name = "backupDBToolStripMenuItem";
-            this.backupDBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.backupDBToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.backupDBToolStripMenuItem.Text = "Backup DB";
             // 
             // exportDBToolStripMenuItem
             // 
             this.exportDBToolStripMenuItem.Name = "exportDBToolStripMenuItem";
-            this.exportDBToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportDBToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.exportDBToolStripMenuItem.Text = "Export DB";
             // 
             // searchToolStripMenuItem
@@ -319,13 +326,6 @@
             this.fuzzySearchToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.fuzzySearchToolStripMenuItem.Text = "Fuzzy Search";
             this.fuzzySearchToolStripMenuItem.Click += new System.EventHandler(this.fuzzySearchToolStripMenuItem_Click);
-            // 
-            // changeDBLocationToolStripMenuItem
-            // 
-            this.changeDBLocationToolStripMenuItem.Name = "changeDBLocationToolStripMenuItem";
-            this.changeDBLocationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.changeDBLocationToolStripMenuItem.Text = "Relocate DB";
-            this.changeDBLocationToolStripMenuItem.Click += new System.EventHandler(this.changeDBLocationToolStripMenuItem_Click);
             // 
             // Form1
             // 

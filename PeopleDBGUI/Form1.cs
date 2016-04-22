@@ -14,7 +14,7 @@ namespace PeopleDBGUI
         {
             InitializeComponent();
             UpdatePeopleGrid();
-            UpdatePersonGrid(DB.DB[0]);
+            //UpdatePersonGrid(DB.DB[0]);
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)

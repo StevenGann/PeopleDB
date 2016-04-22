@@ -28,7 +28,11 @@ namespace PeopleDB
             Directory.CreateDirectory(DBPath);
             Directory.CreateDirectory(DBPath + ImagesPath);
             DB = new ListFile<Person>(DBPath);
-            DB.Load();
+            try
+            {
+                DB.Load();
+            }
+            catch { }
         }
 
         public void Move(string newPath)
